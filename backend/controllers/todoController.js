@@ -31,10 +31,14 @@ const getTodo = async (req, res) => {
 
 // create one
 const createTodo = async (req, res) => {
-	const { title, isCompleted } = req.body
+	const { title } = req.body
+
+	if (!title) {
+		return res.status(400).json({ error: 'Title is required' })
+	}
 
 	try {
-		const todo = await Todo.create({ title, isCompleted })
+		const todo = await Todo.create({ title, isCompleted: false })
 
 		res.status(201).json(todo)
 	} catch (error) {
