@@ -21,7 +21,7 @@ export const todoReducer = (state, action) => {
 						return {
 							...todo,
 							title: action.payload.title,
-							isCompleted: !action.payload.isCompleted,
+							isCompleted: action.payload.isCompleted,
 						}
 					}
 
