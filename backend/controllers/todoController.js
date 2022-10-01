@@ -46,8 +46,49 @@ const createTodo = async (req, res) => {
 	}
 }
 
+// delete one
+const deleteTodo = async (req, res) => {
+	const { id } = req.params
+
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		return res.status(400).json({ error: 'No item found' })
+	}
+
+	try {
+		const todo = await Todo.findByIdAndDelete({ _id: id })
+
+		res.status(200).json(todo)
+	} catch (error) {
+		res.status(400).json({ error: error.message })
+	}
+}
+
+// update one
+const updateTodo = async (req, res) => {
+	const { id } = req.params
+
+	if (!mongoose.Types.ObjectId.isValid(id)) {
+		return res.status(400).json({ error: 'No item found' })
+	}
+
+	try {
+		const todo = await Todo.findByIdAndUpdate(
+			{ _id: id },
+			{
+				...req.body,
+			}
+		)
+
+		res.status(200).json(todo)
+	} catch (error) {
+		res.status(400).json({ error: error.message })
+	}
+}
+
 module.exports = {
 	getTodos,
 	getTodo,
 	createTodo,
+	deleteTodo,
+	updateTodo,
 }

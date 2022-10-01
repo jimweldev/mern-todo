@@ -8,7 +8,22 @@ export const todoReducer = (state, action) => {
 			return { todos: action.payload }
 		case 'CREATE_TODO':
 			return { todos: [action.payload, ...state.todos] }
+		case 'DELETE_TODO':
+			return {
+				todos: state.todos.filter((todo) => {
+					return todo._id !== action.payload._id
+				}),
+			}
+		case 'UPDATE_TODO':
+			return {
+				todos: state.todos.map((todo) => {
+					if (todo._id === action.payload.id) {
+						return { ...todo, isCompleted: action.payload.isCompleted }
+					}
 
+					return todo
+				}),
+			}
 		default:
 			return state
 	}
@@ -16,7 +31,7 @@ export const todoReducer = (state, action) => {
 
 export const TodoContextProvider = ({ children }) => {
 	const [state, dispatch] = useReducer(todoReducer, {
-		todos: null,
+		todos: [],
 	})
 
 	console.log('TodoContext state: ', state)
