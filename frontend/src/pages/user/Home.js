@@ -67,11 +67,9 @@ const Home = () => {
 
 		const data = await res.json()
 
-		console.log(data)
-
 		dispatch({
 			type: 'UPDATE_TODO',
-			payload: { id, isCompleted: !isCompleted },
+			payload: data,
 		})
 	}
 
