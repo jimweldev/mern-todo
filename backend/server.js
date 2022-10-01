@@ -6,6 +6,7 @@ const path = require('path')
 
 // require routes
 const authRoutes = require('./routes/authRoute.js')
+const todoRoutes = require('./routes/todoRoute.js')
 
 // express app
 const app = express()
@@ -20,6 +21,7 @@ app.use((req, res, next) => {
 
 // routes
 app.use('/api/auth/', authRoutes)
+app.use('/api/todos/', todoRoutes)
 
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {
