@@ -21,7 +21,7 @@ const Register = () => {
 		<HomeTemplate>
 			<div className="mx-auto">
 				<form className="form" onSubmit={handleRegister}>
-					<h3>Login</h3>
+					<h3>Register</h3>
 					<input
 						type="text"
 						placeholder="email"
