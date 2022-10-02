@@ -7,7 +7,9 @@ const Todo = require('../models/todoModel')
 
 // get all
 const getTodos = async (req, res) => {
-	const todos = await Todo.find({}).sort({ createdAt: -1 })
+	const { _id } = req.user
+
+	const todos = await Todo.find({ userId: _id }).sort({ createdAt: -1 })
 
 	res.status(200).json(todos)
 }
@@ -31,6 +33,7 @@ const getTodo = async (req, res) => {
 
 // create one
 const createTodo = async (req, res) => {
+	const { _id } = req.user
 	const { title } = req.body
 
 	if (!title) {
@@ -38,7 +41,7 @@ const createTodo = async (req, res) => {
 	}
 
 	try {
-		const todo = await Todo.create({ title, isCompleted: false })
+		const todo = await Todo.create({ userId: _id, title, isCompleted: false })
 
 		res.status(201).json(todo)
 	} catch (error) {

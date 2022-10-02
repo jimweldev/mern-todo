@@ -15,7 +15,12 @@ const Home = () => {
 
 	useEffect(() => {
 		const fetchTodos = async () => {
-			const res = await fetch('/api/todos')
+			const res = await fetch('/api/todos', {
+				method: 'GET',
+				headers: {
+					Authorization: `Bearer ${auth.accessToken}`,
+				},
+			})
 			const data = await res.json()
 
 			if (res.ok) {
@@ -24,7 +29,7 @@ const Home = () => {
 		}
 
 		fetchTodos()
-	}, [dispatch])
+	}, [auth.accessToken, dispatch])
 
 	const handleCreateTodo = async (e) => {
 		e.preventDefault()
@@ -37,6 +42,7 @@ const Home = () => {
 			method: 'POST',
 			body: JSON.stringify(todo),
 			headers: {
+				Authorization: `Bearer ${auth.accessToken}`,
 				'Content-Type': 'application/json',
 			},
 		})
@@ -61,6 +67,7 @@ const Home = () => {
 			method: 'PATCH',
 			body: JSON.stringify({ isCompleted: !isCompleted }),
 			headers: {
+				Authorization: `Bearer ${auth.accessToken}`,
 				'Content-Type': 'application/json',
 			},
 		})
@@ -78,6 +85,9 @@ const Home = () => {
 
 		const res = await fetch(`/api/todos/${id}`, {
 			method: 'DELETE',
+			headers: {
+				Authorization: `Bearer ${auth.accessToken}`,
+			},
 		})
 
 		const data = await res.json()

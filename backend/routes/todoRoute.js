@@ -7,8 +7,11 @@ const {
 	deleteTodo,
 	updateTodo,
 } = require('../controllers/todoController')
+const authMiddleware = require('../middlewares/authMiddleware')
 
 const router = express.Router()
+
+router.use(authMiddleware)
 
 // get all
 router.get('/', getTodos)

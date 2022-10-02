@@ -4,14 +4,19 @@ const Schema = mongoose.Schema
 
 const todoSchema = new Schema(
 	{
+		userId: {
+			type: mongoose.Schema.Types.ObjectId,
+			required: true,
+			ref: 'User',
+		},
 		title: {
 			type: String,
-			require: true,
+			required: true,
 			trim: true,
 		},
 		isCompleted: {
 			type: Boolean,
-			require: true,
+			required: true,
 			trim: true,
 		},
 	},
