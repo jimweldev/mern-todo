@@ -18,26 +18,31 @@ const Login = () => {
 
 	return (
 		<HomeTemplate>
-			<form onSubmit={handleLogin}>
-				{error && error}
-				<input
-					placeholder="email"
-					value={email}
-					onChange={(e) => {
-						setEmail(e.target.value)
-					}}
-				/>
-				<input
-					placeholder="password"
-					value={password}
-					onChange={(e) => {
-						setPassword(e.target.value)
-					}}
-				/>
-				<button type="submit" disabled={isLoading}>
-					Submit
-				</button>
-			</form>
+			<div className="mx-auto">
+				<form className="form" onSubmit={handleLogin}>
+					<h3>Login</h3>
+					<input
+						type="text"
+						placeholder="email"
+						value={email}
+						onChange={(e) => {
+							setEmail(e.target.value)
+						}}
+					/>
+					<input
+						type="password"
+						placeholder="password"
+						value={password}
+						onChange={(e) => {
+							setPassword(e.target.value)
+						}}
+					/>
+					<button className="btn" type="submit" disabled={isLoading}>
+						Submit
+					</button>
+					{error && <div className="error">{error}</div>}
+				</form>
+			</div>
 		</HomeTemplate>
 	)
 }

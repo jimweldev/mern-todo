@@ -19,33 +19,39 @@ const Register = () => {
 
 	return (
 		<HomeTemplate>
-			<form onSubmit={handleRegister}>
-				{error && error}
-				<input
-					placeholder="email"
-					value={email}
-					onChange={(e) => {
-						setEmail(e.target.value)
-					}}
-				/>
-				<input
-					placeholder="password"
-					value={password}
-					onChange={(e) => {
-						setPassword(e.target.value)
-					}}
-				/>
-				<input
-					placeholder="confirm password"
-					value={confirmPassword}
-					onChange={(e) => {
-						setConfirmPassword(e.target.value)
-					}}
-				/>
-				<button type="submit" disabled={isLoading}>
-					Submit
-				</button>
-			</form>
+			<div className="mx-auto">
+				<form className="form" onSubmit={handleRegister}>
+					<h3>Login</h3>
+					<input
+						type="text"
+						placeholder="email"
+						value={email}
+						onChange={(e) => {
+							setEmail(e.target.value)
+						}}
+					/>
+					<input
+						type="password"
+						placeholder="password"
+						value={password}
+						onChange={(e) => {
+							setPassword(e.target.value)
+						}}
+					/>
+					<input
+						type="password"
+						placeholder="confirm password"
+						value={confirmPassword}
+						onChange={(e) => {
+							setConfirmPassword(e.target.value)
+						}}
+					/>
+					<button className="btn" type="submit" disabled={isLoading}>
+						Submit
+					</button>
+					{error && error}
+				</form>
+			</div>
 		</HomeTemplate>
 	)
 }

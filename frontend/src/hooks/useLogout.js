@@ -9,7 +9,7 @@ export const useLogout = () => {
 		localStorage.removeItem('auth')
 
 		dispatch({ type: 'LOGOUT' })
-		todoDispatch({ type: 'SET_TODOS', payload: [] })
+		todoDispatch({ type: 'SET_TODOS', payload: null })
 	}
 
 	return { logout }

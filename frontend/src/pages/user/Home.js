@@ -101,49 +101,60 @@ const Home = () => {
 
 	return (
 		<UserTemplate>
-			<h4>{auth.email}</h4>
+			<main className="main">
+				<div className="container">
+					{/* TODOS  */}
+					<div className="todos">
+						{todos ? (
+							todos.length > 0 ? (
+								todos.map((todo) => {
+									return (
+										<div
+											className={`todo ${todo.isCompleted && 'completed'}`}
+											key={todo._id}
+											onDoubleClick={() => {
+												handleUpdateTodo(todo._id, todo.isCompleted)
+											}}
+										>
+											<h5>{todo.title}</h5>
+											<button
+												className="btn__danger"
+												onClick={(e) => {
+													handleDeleteTodo(e, todo._id)
+												}}
+											>
+												Delete
+											</button>
+										</div>
+									)
+								})
+							) : (
+								<p>No items available</p>
+							)
+						) : (
+							<p>Loading...</p>
+						)}
+					</div>
 
-			{/* TODO CREATE */}
-			<form onSubmit={handleCreateTodo}>
-				<input
-					type="text"
-					value={title}
-					onChange={(e) => {
-						setTitle(e.target.value)
-					}}
-				/>
+					{/* TODO CREATE */}
+					<form className="todo__form" onSubmit={handleCreateTodo}>
+						<h4>Create Todo</h4>
 
-				<button type="submit" ref={createTodoSubmitRef}>
-					Submit
-				</button>
-				{error && error}
-			</form>
-
-			{/* TODOS  */}
-			{todos.length > 0 ? (
-				todos.map((todo) => {
-					return (
-						<div
-							key={todo._id}
-							onDoubleClick={() => {
-								handleUpdateTodo(todo._id, todo.isCompleted)
+						<input
+							type="text"
+							value={title}
+							onChange={(e) => {
+								setTitle(e.target.value)
 							}}
-						>
-							<h5>{todo.title}</h5>
-							<p>{todo.isCompleted ? 'completed' : 'not completed'}</p>
-							<button
-								onClick={(e) => {
-									handleDeleteTodo(e, todo._id)
-								}}
-							>
-								Delete
-							</button>
-						</div>
-					)
-				})
-			) : (
-				<div>No items available</div>
-			)}
+						/>
+
+						<button className="btn" type="submit" ref={createTodoSubmitRef}>
+							Submit
+						</button>
+						{error && error}
+					</form>
+				</div>
+			</main>
 		</UserTemplate>
 	)
 }

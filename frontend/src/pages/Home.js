@@ -5,7 +5,11 @@ import HomeTemplate from '../components/templates/HomeTemplate'
 const Home = () => {
 	return (
 		<HomeTemplate>
-			<h1>Home</h1>
+			<div className="container">
+				<center>
+					<h1>Welcome to MERN Todo!</h1>
+				</center>
+			</div>
 		</HomeTemplate>
 	)
 }
